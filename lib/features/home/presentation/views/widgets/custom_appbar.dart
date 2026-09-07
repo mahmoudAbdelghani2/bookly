@@ -12,7 +12,8 @@ class CustomAppBar extends StatelessWidget {
         Image.asset(AssetsData.kLogo, height: 25),
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.search, size: 30),
+          icon: const Icon(Icons.search,
+              size: 30, color: Colors.white, fontWeight: FontWeight.w600),
         ),
       ],
     );
