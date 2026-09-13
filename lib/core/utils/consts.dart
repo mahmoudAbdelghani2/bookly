@@ -6,3 +6,4 @@ const kSectraFine = 'GT Sectra Fine';
 const kSplashPath = "/";
 const kHomePath = "/home";
 const kDetailsPath = "/details";
+const kSearchPath = "/search";
