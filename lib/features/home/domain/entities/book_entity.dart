@@ -11,5 +11,6 @@ class BookEntity {
     required this.authorName,
     required this.rating,
     required this.price,
+    required String bookId,
   });
 }
