@@ -17,16 +17,22 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<BookEntity>> fetchFeaturedBooks() async {
-    var response = await apiConsumer.get(
-      endpoint: 'volumes?Filtering=free-ebooks&q=Programming',
-    );
+    var response = await apiConsumer.get(endpoint: 'volumes', queryParameters: {
+      'Filtering': 'free-ebooks',
+      'q': 'Programming',
+    });
     List<BookEntity> books = getBooksList(response);
     return books;
   }
 
   @override
-  Future<List<BookEntity>> fetchNewestBooks() {
-    // TODO: implement fetchNewestBooks
-    throw UnimplementedError();
+  Future<List<BookEntity>> fetchNewestBooks() async {
+    var response = await apiConsumer.get(endpoint: 'volumes', queryParameters: {
+      'Filtering': 'free-ebooks',
+      'q': 'Programming',
+      'Sorting': 'newest',
+    });
+    List<BookEntity> books = getBooksList(response);
+    return books;
   }
 }
