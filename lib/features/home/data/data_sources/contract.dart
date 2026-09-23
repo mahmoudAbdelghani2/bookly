@@ -4,3 +4,8 @@ abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks();
   Future<List<BookEntity>> fetchNewestBooks();
 }
+
+abstract class HomeLocalDataSource {
+  List<BookEntity> fetchFeaturedBooks();
+  List<BookEntity> fetchNewestBooks();
+}
