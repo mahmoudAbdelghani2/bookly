@@ -2,8 +2,11 @@ import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('book_entity');
   runApp(const Bookly());
 }
 
