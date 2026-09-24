@@ -1,19 +1,14 @@
 import 'package:bookly/core/utils/api_consumer.dart';
+import 'package:bookly/core/utils/consts.dart';
+import 'package:bookly/core/utils/functions/save_local_data.dart';
 import 'package:bookly/features/home/data/data_sources/contract.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
+import 'package:hive/hive.dart';
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   final ApiConsumer apiConsumer;
   HomeRemoteDataSourceImpl(this.apiConsumer);
-
-  List<BookEntity> getBooksList(Map<String, dynamic> response) {
-    List<BookEntity> books = [];
-    for (var book in response['items']) {
-      books.add(BookModel.fromJson(book));
-    }
-    return books;
-  }
 
   @override
   Future<List<BookEntity>> fetchFeaturedBooks() async {
@@ -22,6 +17,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       'q': 'Programming',
     });
     List<BookEntity> books = getBooksList(response);
+    saveDataLocal(books: books, boxName: kFeaturedBox);
     return books;
   }
 
@@ -33,6 +29,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       'Sorting': 'newest',
     });
     List<BookEntity> books = getBooksList(response);
+    return books;
+  }
+
+  List<BookEntity> getBooksList(Map<String, dynamic> response) {
+    List<BookEntity> books = [];
+    for (var book in response['items']) {
+      books.add(BookModel.fromJson(book));
+    }
     return books;
   }
 }
