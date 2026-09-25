@@ -5,6 +5,7 @@ import 'package:bookly/features/home/data/data_sources/contract.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:bookly/features/home/domain/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class HomeRepoImpl extends HomeRepo {
   final HomeLocalDataSource localDataSource;
@@ -22,7 +23,11 @@ class HomeRepoImpl extends HomeRepo {
       return Right(remoteBooks);
     } catch (e) {
       log(e.toString());
-      return Left(Failure());
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(
+          message: 'An error occurred while fetching featured books.'));
     }
   }
 
@@ -37,7 +42,11 @@ class HomeRepoImpl extends HomeRepo {
       return Right(remoteBooks);
     } catch (e) {
       log(e.toString());
-      return Left(Failure());
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(
+          message: 'An error occurred while fetching newest books.'));
     }
   }
 }
