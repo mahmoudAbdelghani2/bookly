@@ -4,7 +4,6 @@ import 'package:bookly/core/utils/functions/save_local_data.dart';
 import 'package:bookly/features/home/data/data_sources/contract.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/domain/entities/book_entity.dart';
-import 'package:hive/hive.dart';
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   final ApiConsumer apiConsumer;
@@ -29,6 +28,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       'Sorting': 'newest',
     });
     List<BookEntity> books = getBooksList(response);
+    saveDataLocal(books: books, boxName: kNewestBooksBox);
     return books;
   }
 
