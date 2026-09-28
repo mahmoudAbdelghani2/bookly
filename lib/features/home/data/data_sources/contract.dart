@@ -6,6 +6,6 @@ abstract class HomeRemoteDataSource {
 }
 
 abstract class HomeLocalDataSource {
-  List<BookEntity> fetchFeaturedBooks();
+  List<BookEntity> fetchFeaturedBooks({int pageNumber = 0});
   List<BookEntity> fetchNewestBooks();
 }

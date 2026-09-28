@@ -16,11 +16,13 @@ class HomeRepoImpl extends HomeRepo {
   Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks(
       {int pageNumber = 0}) async {
     try {
-      var localBooks = localDataSource.fetchFeaturedBooks();
+      var localBooks =
+          localDataSource.fetchFeaturedBooks(pageNumber: pageNumber);
       if (localBooks.isNotEmpty) {
         return Right(localBooks);
       }
-      var remoteBooks = await remoteDataSource.fetchFeaturedBooks();
+      var remoteBooks =
+          await remoteDataSource.fetchFeaturedBooks(pageNumber: pageNumber);
       return Right(remoteBooks);
     } catch (e) {
       log(e.toString());

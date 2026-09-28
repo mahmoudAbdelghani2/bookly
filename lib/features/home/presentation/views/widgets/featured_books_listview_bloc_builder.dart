@@ -1,3 +1,4 @@
+import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:bookly/features/home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
 import 'package:bookly/features/home/presentation/manager/featured_books_cubit/featured_books_states.dart';
 import 'package:bookly/features/home/presentation/views/widgets/featured_list_view.dart';
@@ -14,13 +15,20 @@ class FeaturedBooksListViewBlocBuilder extends StatefulWidget {
 
 class _FeaturedBooksListViewBlocBuilderState
     extends State<FeaturedBooksListViewBlocBuilder> {
+  List<BookEntity> books = [];
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
-        builder: (context, state) {
+    return BlocConsumer<FeaturedBooksCubit, FeaturedBooksState>(
+        listener: (context, state) {
       if (state is FeaturedBooksSuccess) {
+        var newBooks = state.books;
+        books.addAll(newBooks);
+      }
+    }, builder: (context, state) {
+      if (state is FeaturedBooksSuccess ||
+          state is FeaturedBooksPaginationLoading) {
         return FeaturedBooksListView(
-          books: state.books,
+          books: books,
         );
       } else if (state is FeaturedBooksFailure) {
         return Center(
