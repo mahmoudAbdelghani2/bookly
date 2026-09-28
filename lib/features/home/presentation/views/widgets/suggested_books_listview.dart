@@ -12,7 +12,9 @@ class SuggestedBooksListView extends StatelessWidget {
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return const CustomListViewContainer();
+          return const CustomListViewContainer(
+            imageUrl: '',
+          );
         },
       ),
     );

@@ -26,7 +26,9 @@ class BookDetailsScreenBody extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: MediaQuery.of(context).size.width * 0.23),
-                child: const CustomListViewContainer(),
+                child: const CustomListViewContainer(
+                  imageUrl: '',
+                ),
               ),
               const SizedBox(height: 35),
               Text(

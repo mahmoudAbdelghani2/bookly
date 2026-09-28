@@ -14,8 +14,10 @@ class FeaturedBooksListView extends StatelessWidget {
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final book = books[index];
-          return const CustomListViewContainer();
+          final bookImageUrl = books[index].image ?? '';
+          return CustomListViewContainer(
+            imageUrl: bookImageUrl,
+          );
         },
       ),
     );
