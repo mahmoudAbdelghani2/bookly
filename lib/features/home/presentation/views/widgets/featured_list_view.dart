@@ -1,8 +1,10 @@
+import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_list_view_container.dart';
 import 'package:flutter/material.dart';
 
 class FeaturedBooksListView extends StatelessWidget {
-  const FeaturedBooksListView({super.key});
+  final List<BookEntity> books;
+  const FeaturedBooksListView({super.key, required this.books});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,7 @@ class FeaturedBooksListView extends StatelessWidget {
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          final book = books[index];
           return const CustomListViewContainer();
         },
       ),

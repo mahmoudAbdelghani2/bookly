@@ -16,8 +16,8 @@ import 'package:hive_flutter/adapters.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
-  await Hive.openBox(kFeaturedBox);
-  await Hive.openBox(kNewestBooksBox);
+  await Hive.openBox<BookEntity>(kFeaturedBox);
+  await Hive.openBox<BookEntity>(kNewestBooksBox);
   Bloc.observer = SimpleBlocObserver();
   setupGetIt();
   runApp(const Bookly());
@@ -34,7 +34,7 @@ class Bookly extends StatelessWidget {
           create: (context) => FeaturedBooksCubit(
             featuredBooksUseCase:
                 FeatchFeaturedBooksUsecase(homeRepo: getIt.get<HomeRepoImpl>()),
-          ),
+          )..fetchFeaturedBooks(),
         ),
         BlocProvider(
           create: (context) => FeatchNewestBooksCubit(
