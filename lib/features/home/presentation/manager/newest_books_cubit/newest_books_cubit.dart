@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FeatchNewestBooksCubit extends Cubit<NewestBooksState> {
   final FeatchNewestBooksUsecase getNewestBooksUseCase;
 
-  FeatchNewestBooksCubit(this.getNewestBooksUseCase)
+  FeatchNewestBooksCubit({required this.getNewestBooksUseCase})
       : super(NewestBooksInitial());
 
   Future<void> fetchNewestBooks() async {
